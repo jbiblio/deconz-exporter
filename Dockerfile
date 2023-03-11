@@ -1,4 +1,4 @@
-FROM golang:1.13.8 AS build
+FROM golang:alpine as build
 ENV TOKEN=0 \
     PORT=2112 \
     DECONZ_HOST=localhost \
@@ -16,10 +16,11 @@ RUN adduser \
     --uid "${UID}" \    
     "${USER}"
 
+RUN apk add git build-base
 RUN go mod download
 RUN CGO_ENABLED=0 go build -o deconz-exporter
 
-FROM scratch
+FROM alpine
 
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build /etc/group /etc/group
