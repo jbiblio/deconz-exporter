@@ -20,7 +20,7 @@ RUN apk add git build-base
 RUN go mod download
 RUN CGO_ENABLED=0 go build -o deconz-exporter
 
-FROM alpine
+FROM alpine:3.17
 
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build /etc/group /etc/group
