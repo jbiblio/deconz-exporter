@@ -1,4 +1,4 @@
-FROM golang:alpine as build
+FROM golang:1.19-alpine3.17 as build
 ENV TOKEN=0 \
     PORT=2112 \
     DECONZ_HOST=localhost \
